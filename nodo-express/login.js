@@ -49,5 +49,5 @@ function mostrarError(mensaje) {
 
 function mostrarMensajeBienvenida(nombreUsuario) {
     document.getElementById('mensajeBienvenida').innerText = `Bienvenido, ${nombreUsuario}!`;
-    // Aquí puedes redirigir al usuario a la página de bienvenida o realizar otras acciones
+    
 }

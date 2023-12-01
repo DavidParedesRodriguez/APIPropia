@@ -3,7 +3,7 @@ function registrarUsuario() {
     const email = document.getElementById('email').value;
     const contrasena = document.getElementById('contrasena').value;
     const confirmarContrasena = document.getElementById('confirmarContrasena').value;
-    const anotacion = document.getElementById('anotaciones').value; // Agregamos la anotación
+    const anotacion = document.getElementById('anotaciones').value; 
 
     if (!nombre || !email || !contrasena || !confirmarContrasena) {
         mostrarError("Todos los campos son obligatorios.");
@@ -24,7 +24,7 @@ function registrarUsuario() {
         name: nombre,
         email: email,
         password: contrasena,
-        annotations: anotacion, // Agrega las anotaciones al objeto userData
+        annotations: anotacion, 
     };
 
     fetch('http://localhost:8000/api/user/', {
@@ -46,7 +46,7 @@ function registrarUsuario() {
         // Almacena el token en localStorage
         localStorage.setItem('token', data.token);
 
-        // Asegurarte de que las rutas seguras usen el token
+        
         fetch('http://localhost:8000/ruta-segura', {
             method: 'GET',
             headers: {
@@ -63,7 +63,7 @@ function registrarUsuario() {
             console.log('Respuesta del servidor (Ruta segura):', data);
             localStorage.setItem('token', data.token);
 
-            // Puedes manejar la respuesta de la ruta segura aquí
+           
         })
         .catch(error => {
             console.error(error.message);
@@ -73,7 +73,7 @@ function registrarUsuario() {
         // Llamada para agregar anotaciones después de registrar al usuario
         agregarAnotaciones(data.id, anotacion);
         
-        // Puedes redirigir o realizar otras acciones después del registro
+      
     })
     .catch(error => {
         console.error(error.message);
@@ -94,7 +94,7 @@ function agregarAnotaciones(userId, anotacion) {
     .then(response => response.json())
     .then(data => {
         console.log('Anotaciones agregadas:', data);
-        // Puedes realizar acciones adicionales después de agregar las anotaciones
+       
     })
     .catch(error => {
         console.error(error.message);

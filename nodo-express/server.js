@@ -238,7 +238,7 @@ app.post("/api/login/", (req, res, next) => {
             message: "success",
             token: token,
             userId: row.id,
-            name: row.name,  // Agrega el nombre del usuario
+            name: row.name,  
         });
     });
 });
@@ -250,15 +250,13 @@ function hashPassword(password) {
 }
 
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
-    // Tu lógica segura aquí
+    
     res.json({ message: "Ruta segura." });
 });
 
 // Función para generar un token
 function generarToken(userId) {
-    // Implementa lógica para generar un token (puedes usar bibliotecas como jsonwebtoken)
-    // Aquí hay un ejemplo simple:
-    const token = userId.toString();  // Puedes usar bibliotecas más robustas para esto
+    const token = userId.toString();  
     return token;
 }
 
@@ -283,7 +281,6 @@ function verificarToken(req, res, next) {
 
 // Aplicar middleware a las rutas que requieran autenticación
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
-    // Tu lógica segura aquí
     res.json({ message: "Ruta segura." });
 });
 
