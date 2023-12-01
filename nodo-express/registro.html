@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f8ff; /* Fondo azul clarito */
+        margin: 0;
+      }
+
+      .container {
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label,
+      input,
+      textarea {
+        margin: 10px 0;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #4682b4; /* Azul un poco más oscuro */
+        color: #fff; /* Texto blanco */
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #4169e1; /* Cambio de color al pasar el ratón */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Registro de Usuario</h1>
+      <form id="registrationForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" required minlength="8" />
+
+        <label for="confirmarContrasena">Confirmar Contraseña:</label>
+        <input
+          type="password"
+          id="confirmarContrasena"
+          required
+          minlength="8"
+        />
+
+        <label for="anotaciones">Anotaciones:</label>
+        <textarea id="anotaciones" rows="4"></textarea>
+
+        <button type="button" onclick="registrarUsuario()">Registrar</button>
+        <button onclick="irAIndex()">Volver a Inicio</button>
+      </form>
+
+      <div id="mensajeError"></div>
+    </div>
+
+    <script src="registro.js"></script>
+    <script>
+      function irAIndex() {
+        window.location.href = "index.html"; // Cambia 'index.html' al nombre de tu archivo principal
+      }
+    </script>
+  </body>
+</html>
