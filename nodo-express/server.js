@@ -3,7 +3,7 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const db = require("./database.js");
-const md5 = require("md5");
+const crypto  = require("crypto");
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -17,14 +17,12 @@ app.use(cors());
 const HTTP_PORT = 8000;
 const HTTPS_PORT = 8443;
 
-
 https.createServer({
   cert: fs.readFileSync('ca.crt'),
   key: fs.readFileSync('ca.key')
 },app).listen(HTTPS_PORT, function(){
  console.log('Servidor https correindo en el puerto 443');
 });
-
 
 app.listen(HTTP_PORT, () => {
   console.log(`Server running on port ${HTTP_PORT}`);
@@ -64,40 +62,40 @@ app.get("/api/user/:id", (req, res, next) => {
 });
 
 app.post("/api/user/", (req, res, next) => {
-    var errors=[]
-    if (!req.body.password){
-        errors.push("No password specified");
-    }
-    if (!req.body.email){
-        errors.push("No email specified");
-    }
-    if (errors.length){
-        res.status(400).json({"error":errors.join(",")});
-        return;
-    }
-    var data = {
-        name: req.body.name,
-        email: req.body.email,
-        password : md5(req.body.password)
-    }
-    var sql ='INSERT INTO user (name, email, password) VALUES (?,?,?)'
-    var params =[data.name, data.email, data.password]
-    db.run(sql, params, function (err, result) {
-        if (err){
-            res.status(400).json({"error": err.message})
-            return;
-        }
-        res.json({
-            "message": "success",
-            "data": data,
-            "id" : this.lastID
-        });
-    });
+  var errors = []
+  if (!req.body.password){
+      errors.push("No password specified");
+  }
+  if (!req.body.email){
+      errors.push("No email specified");
+  }
+  if (errors.length){
+      res.status(400).json({"error":errors.join(",")});
+      return;
+  }
+  var data = {
+      name: req.body.name,
+      email: req.body.email,
+      password : hashPassword(req.body.password)  // Usa la función hashPassword
+  }
+  var sql ='INSERT INTO user (name, email, password) VALUES (?,?,?)'
+  var params =[data.name, data.email, data.password]
+  db.run(sql, params, function (err, result) {
+      if (err){
+          res.status(400).json({"error": err.message})
+          return;
+      }
+      res.json({
+          "message": "success",
+          "data": data,
+          "id" : this.lastID
+      });
+  });
 });
 
 app.get("/api/userLogin/:email/:password", (req, res, next) => {
   const sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-  const params = [req.params.email, md5(req.params.password)];
+  const params = [req.params.email, hashPassword(req.params.password)];
   db.get(sql, params, (err, row) => {
     if (err) {
       res.status(400).json({ error: err.message });
@@ -109,7 +107,6 @@ app.get("/api/userLogin/:email/:password", (req, res, next) => {
     });
   });
 });
-
 
 app.post("/api/login/", (req, res, next) => {
     var errors = [];
@@ -124,7 +121,7 @@ app.post("/api/login/", (req, res, next) => {
     }
 
     var sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-    var params = [req.body.email, md5(req.body.password)];
+    var params = [req.body.email, hashPassword(req.body.password)];
 
     db.get(sql, params, (err, row) => {
         if (err) {
@@ -148,6 +145,11 @@ app.post("/api/login/", (req, res, next) => {
     });
 });
 
+function hashPassword(password) {
+  const sha512 = crypto.createHash('sha512');
+  const hashedPassword = sha512.update(password).digest('hex');
+  return hashedPassword;
+}
 
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
     // Tu lógica segura aquí
@@ -161,7 +163,6 @@ function generarToken(userId) {
     const token = userId.toString();  // Puedes usar bibliotecas más robustas para esto
     return token;
 }
-
 
 function verificarToken(req, res, next) {
     const token = req.headers['authorization'];
@@ -183,9 +184,9 @@ function verificarToken(req, res, next) {
 }
 
 
-
 // Aplicar middleware a las rutas que requieran autenticación
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
     // Tu lógica segura aquí
     res.json({ message: "Ruta segura." });
 });
+
