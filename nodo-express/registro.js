@@ -3,6 +3,7 @@ function registrarUsuario() {
     const email = document.getElementById('email').value;
     const contrasena = document.getElementById('contrasena').value;
     const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+    const anotacion = document.getElementById('anotaciones').value; // Agregamos la anotación
 
     if (!nombre || !email || !contrasena || !confirmarContrasena) {
         mostrarError("Todos los campos son obligatorios.");
@@ -23,6 +24,7 @@ function registrarUsuario() {
         name: nombre,
         email: email,
         password: contrasena,
+        annotations: anotacion, // Agrega las anotaciones al objeto userData
     };
 
     fetch('http://localhost:8000/api/user/', {
@@ -68,11 +70,35 @@ function registrarUsuario() {
             mostrarError("Error al conectar con la API (Ruta segura)");
         });
 
+        // Llamada para agregar anotaciones después de registrar al usuario
+        agregarAnotaciones(data.id, anotacion);
+        
         // Puedes redirigir o realizar otras acciones después del registro
     })
     .catch(error => {
         console.error(error.message);
         mostrarError("Error al conectar con la API");
+    });
+}
+
+// Función para agregar anotaciones
+function agregarAnotaciones(userId, anotacion) {
+    fetch(`http://localhost:8000/api/userAnnotations/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token'),
+        },
+        body: JSON.stringify({ user_id: userId, annotation: anotacion }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Anotaciones agregadas:', data);
+        // Puedes realizar acciones adicionales después de agregar las anotaciones
+    })
+    .catch(error => {
+        console.error(error.message);
+        // Manejar errores, si es necesario
     });
 }
 
