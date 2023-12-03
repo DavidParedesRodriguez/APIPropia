@@ -105,3 +105,4 @@ function agregarAnotaciones(userId, anotacion) {
 function mostrarError(mensaje) {
     document.getElementById('mensajeError').innerText = mensaje;
 }
+

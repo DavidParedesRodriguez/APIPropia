@@ -283,4 +283,3 @@ function verificarToken(req, res, next) {
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
     res.json({ message: "Ruta segura." });
 });
-
