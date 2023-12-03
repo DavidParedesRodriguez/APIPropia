@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4682b4;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4169e1;
+        }
+
+        textarea {
+            width: 100%;
+            box-sizing: border-box; /* Asegura que el ancho incluya el relleno y el borde */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Anotaciones</h1>
+        <textarea id="nuevasAnotaciones" rows="4"></textarea>
+        <button onclick="agregarAnotaciones()">Agregar Anotación</button>
+        <button onclick="volverAInicio()">Volver a Iniciar sesion</button>
+    </div>
+
+    <script src="notaciones.js"></script>
+    <script>
+        function volverAInicio() {
+            // Redirige a la página de inicio de sesión
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
