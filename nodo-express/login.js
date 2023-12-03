@@ -31,7 +31,11 @@ function iniciarSesion() {
         return response.json();
     })
     .then(data => {
-        mostrarMensajeBienvenida(data.name);
+        // Abre otra ventana o pestaña para agregar anotaciones
+        const userId = data.userId;  // Asegúrate de que esta propiedad sea la correcta en tu respuesta
+        const nuevaVentana = window.open(`notaciones.html?userId=${userId}`, '_blank');
+      
+       
     })
     .catch(error => {
         if (error.message.includes("Credenciales incorrectas.")) {

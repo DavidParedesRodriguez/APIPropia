@@ -103,17 +103,29 @@ app.get("/api/user/:id", (req, res, next) => {
 });
 
 // Nuevo endpoint para obtener anotaciones de un usuario específico
-app.get("/api/userAnnotations/:id", (req, res, next) => {
-  const sql = "SELECT annotation FROM user_annotations WHERE user_id = ?";
-  const params = [req.params.id];
+app.get("/api/userAndAnnotations/:id", (req, res, next) => {
+  const userId = req.params.id;
+
+  const sql = `
+    SELECT user.id as user_id, user.name, user.email, 
+           user_annotations.id as annotation_id, user_annotations.annotation
+    FROM user
+    LEFT JOIN user_annotations ON user.id = user_annotations.user_id
+    WHERE user.id = ?;
+  `;
+
+  const params = [userId];
+
   db.all(sql, params, (err, rows) => {
     if (err) {
       res.status(400).json({ error: err.message });
       return;
     }
+
     res.json({
       message: "success",
-      annotations: rows,
+      userData: rows[0],
+      annotations: rows.map(row => row.annotation),
     });
   });
 });
@@ -123,18 +135,31 @@ app.post("/api/userAnnotations/:id", (req, res, next) => {
   const userId = req.params.id;
   const { annotation } = req.body;
 
-  const sql = "INSERT INTO user_annotations (user_id, annotation) VALUES (?, ?)";
-  const params = [userId, annotation];
+  const sqlInsert = "INSERT INTO user_annotations (user_id, annotation) VALUES (?, ?)";
+  const paramsInsert = [userId, annotation];
 
-  db.run(sql, params, function (err, result) {
-      if (err) {
-          res.status(400).json({ error: err.message });
-          return;
+  db.run(sqlInsert, paramsInsert, function (err) {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+
+    // Obtener la fila recién insertada
+    const insertedRowId = this.lastID;
+    const sqlSelect = "SELECT * FROM user_annotations WHERE id = ?";
+    const paramsSelect = [insertedRowId];
+
+    db.get(sqlSelect, paramsSelect, (selectErr, row) => {
+      if (selectErr) {
+        res.status(400).json({ error: selectErr.message });
+        return;
       }
+
       res.json({
-          message: "success",
-          affectedRows: this.changes,
+        message: "success",
+        data: row,
       });
+    });
   });
 });
 
