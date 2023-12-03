@@ -51,3 +51,4 @@ function mostrarMensajeBienvenida(nombreUsuario) {
     document.getElementById('mensajeBienvenida').innerText = `Bienvenido, ${nombreUsuario}!`;
     
 }
+
