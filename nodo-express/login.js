@@ -31,8 +31,8 @@ function iniciarSesion() {
         return response.json();
     })
     .then(data => {
-        // Abre otra ventana o pestaña para agregar anotaciones
-        const userId = data.userId;  // Asegúrate de que esta propiedad sea la correcta en tu respuesta
+        
+        const userId = data.userId; 
         const nuevaVentana = window.open(`notaciones.html?userId=${userId}`, '_blank');
       
        

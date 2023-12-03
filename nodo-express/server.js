@@ -257,7 +257,7 @@ app.post("/api/login/", (req, res, next) => {
             return;
         }
 
-        // Crear y enviar token
+        
         const token = generarToken(row.id);
         res.json({
             message: "success",
@@ -279,7 +279,7 @@ app.get("/ruta-segura", verificarToken, (req, res, next) => {
     res.json({ message: "Ruta segura." });
 });
 
-// Función para generar un token
+
 function generarToken(userId) {
     const token = userId.toString();  
     return token;
@@ -304,7 +304,7 @@ function verificarToken(req, res, next) {
     });
 }
 
-// Aplicar middleware a las rutas que requieran autenticación
+
 app.get("/ruta-segura", verificarToken, (req, res, next) => {
     res.json({ message: "Ruta segura." });
 });

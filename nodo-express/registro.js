@@ -43,7 +43,6 @@ function registrarUsuario() {
     .then(data => {
         console.log('Respuesta del servidor:', data);
 
-        // Almacena el token en localStorage
         localStorage.setItem('token', data.token);
 
         
@@ -70,7 +69,6 @@ function registrarUsuario() {
             mostrarError("Error al conectar con la API (Ruta segura)");
         });
 
-        // Llamada para agregar anotaciones después de registrar al usuario
         agregarAnotaciones(data.id, anotacion);
         
       
@@ -81,7 +79,6 @@ function registrarUsuario() {
     });
 }
 
-// Función para agregar anotaciones
 function agregarAnotaciones(userId, anotacion) {
     fetch(`http://localhost:8000/api/userAnnotations/${userId}`, {
         method: 'POST',
@@ -98,7 +95,6 @@ function agregarAnotaciones(userId, anotacion) {
     })
     .catch(error => {
         console.error(error.message);
-        // Manejar errores, si es necesario
     });
 }
 
