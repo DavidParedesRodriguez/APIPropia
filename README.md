@@ -16,24 +16,24 @@ Esto ejecutará el comando node app.js. Para visualizar la API en tu navegador, 
 Configuración Inicial:
 
 1. Se siguió la práctica "Build a REST API with Node.js SQLite and Express JS" para construir el servidor y la base de datos.
-· La estructura básica del servidor y la base de datos se implementaron según la guía proporcionada.
-· Formularios de Registro e Inicio de Sesión:
+* La estructura básica del servidor y la base de datos se implementaron según la guía proporcionada.
+* Formularios de Registro e Inicio de Sesión:
 
 2. Se crearon formularios para los endpoints de registro e inicio de sesión.
-· Se establecieron requisitos para los campos, como obligatoriedad y longitud mínima de contraseña.
-· Se implementaron mensajes de ayuda para guiar al usuario durante el proceso.
-· Habilitación de HTTPS:
+* Se establecieron requisitos para los campos, como obligatoriedad y longitud mínima de contraseña.
+* Se implementaron mensajes de ayuda para guiar al usuario durante el proceso.
+* Habilitación de HTTPS:
 
 3. Se intentó habilitar el protocolo HTTPS para mejorar la seguridad de la comunicación.
-· A pesar de enfrentar problemas, se siguieron los pasos recomendados para la implementación segura de HTTPS.
-· Cambio de Cifrado a SHA512:
+* A pesar de enfrentar problemas, se siguieron los pasos recomendados para la implementación segura de HTTPS.
+* Cambio de Cifrado a SHA512:
 
 4. Se realizó una actualización en el cifrado de contraseñas, pasando de MD5 a SHA512.
-· Este cambio mejora la seguridad de las contraseñas almacenadas en la base de datos.
-· Agregación de Anotaciones:
+* Este cambio mejora la seguridad de las contraseñas almacenadas en la base de datos.
+* Agregación de Anotaciones:
 
 5. Se implementó la funcionalidad para agregar anotaciones a los usuarios después de iniciar sesión.
-· Al iniciar sesión, se abre una nueva ventana que permite al usuario ingresar anotaciones relacionadas con su cuenta.
+* Al iniciar sesión, se abre una nueva ventana que permite al usuario ingresar anotaciones relacionadas con su cuenta.
 
 ### Estructura del Proyecto
 
