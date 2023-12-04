@@ -12,6 +12,29 @@ npm run start
 
 Esto ejecutará el comando node app.js. Para visualizar la API en tu navegador, utiliza la extensión "Go Live" en Visual Studio Code.
 
+### Resumen del Proceso de Desarrollo
+Configuración Inicial:
+
+1. Se siguió la práctica "Build a REST API with Node.js SQLite and Express JS" para construir el servidor y la base de datos.
+· La estructura básica del servidor y la base de datos se implementaron según la guía proporcionada.
+· Formularios de Registro e Inicio de Sesión:
+
+2. Se crearon formularios para los endpoints de registro e inicio de sesión.
+· Se establecieron requisitos para los campos, como obligatoriedad y longitud mínima de contraseña.
+· Se implementaron mensajes de ayuda para guiar al usuario durante el proceso.
+· Habilitación de HTTPS:
+
+3. Se intentó habilitar el protocolo HTTPS para mejorar la seguridad de la comunicación.
+· A pesar de enfrentar problemas, se siguieron los pasos recomendados para la implementación segura de HTTPS.
+· Cambio de Cifrado a SHA512:
+
+4. Se realizó una actualización en el cifrado de contraseñas, pasando de MD5 a SHA512.
+· Este cambio mejora la seguridad de las contraseñas almacenadas en la base de datos.
+· Agregación de Anotaciones:
+
+5. Se implementó la funcionalidad para agregar anotaciones a los usuarios después de iniciar sesión.
+· Al iniciar sesión, se abre una nueva ventana que permite al usuario ingresar anotaciones relacionadas con su cuenta.
+
 ### Estructura del Proyecto
 
 El proyecto consta de varios archivos que colaboran para crear una aplicación web con funcionalidades de registro, inicio de sesión y gestión de anotaciones asociadas a usuarios específicos.
@@ -32,6 +55,7 @@ Archivos Principales
 Los archivos **notaciones.html y notaciones.js** Estos archivos trabajan en conjunto para proporcionar la funcionalidad de agregar anotaciones, recuperando el user\_id de la URL y haciendo solicitudes a la API. La página está diseñada para ser visualmente coherente con el estilo general del proyecto.
 
 * Estilos Compartidos: Se compartieron estilos CSS entre las páginas login.html y notaciones.html para mantener una apariencia coherente.
+
 
 ### Librerías Utilizadas
 
