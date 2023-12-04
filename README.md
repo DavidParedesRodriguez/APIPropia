@@ -1,8 +1,10 @@
-\# APIPropia 
+## APIPropia 
 
-## Cómo Ejecutar la API Para ejecutar la API, sigue estos pasos:
+### Cómo Ejecutar la API Para ejecutar la API, sigue estos pasos:
 
-1. Abre tu terminal y navega a la carpeta `~/APIPropia/nodo-express`. ```bash cd ~/APIPropia/nodo-express
+1. Abre tu terminal y navega a la carpeta `~/APIPropia/nodo-express`. 
+
+cd ~/APIPropia/nodo-express
 
 1. Ejecuta el siguiente comando para iniciar la API.
 
@@ -10,7 +12,7 @@ npm run start
 
 Esto ejecutará el comando node app.js. Para visualizar la API en tu navegador, utiliza la extensión "Go Live" en Visual Studio Code.
 
-## Estructura del Proyecto
+### Estructura del Proyecto
 
 El proyecto consta de varios archivos que colaboran para crear una aplicación web con funcionalidades de registro, inicio de sesión y gestión de anotaciones asociadas a usuarios específicos.
 
@@ -31,7 +33,7 @@ Los archivos **notaciones.html y notaciones.js** Estos archivos trabajan en conj
 
 * Estilos Compartidos: Se compartieron estilos CSS entre las páginas login.html y notaciones.html para mantener una apariencia coherente.
 
-## Librerías Utilizadas
+### Librerías Utilizadas
 
 * Express.js: Framework web para Node.js que facilita la creación de aplicaciones web y API.
 * SQLite: Base de datos incorporada en el proyecto para almacenar información de usuarios y anotaciones.
